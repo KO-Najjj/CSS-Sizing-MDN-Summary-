@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>CSS Sizing & Selectors Activity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    /* Global/reset-ish */
+    html { font-size: 16px; }
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      line-height: 1.5;
+      margin: 0;
+      padding: 24px;
+      max-width: 900px;
+      margin-inline: auto;
+    }
+    section { border: 1px solid #ddd; padding: 16px; margin-bottom: 20px; border-radius: 8px; }
+    h1, h2 { margin-top: 0; }
+
+    /* -------- TASK 1: % padding & margin -------- */
+    .t1-parent {
+      /* STEP: change this from 400px to 800px to observe changes */
+      width: 400px;               /* ← edit me to 800px and watch */
+      background: #e7f3ff;
+      padding: 8px;
+    }
+    .t1-child {
+      margin-top: 10%;            /* % of parent’s WIDTH, not height */
+      padding: 5%;                /* % of parent’s WIDTH */
+      background: #ffb59e;
+    }
+
+    /* -------- TASK 2: viewport units -------- */
+    .t2-hero {
+      width: 50vw;                /* half of viewport width */
+      height: 30vh;               /* 30% of viewport height */
+      background: #3aa076;
+      color: white;
+      display: grid;
+      place-items: center;
+      font-size: 5vh;             /* scales with viewport height */
+      border-radius: 8px;
+    }
+
+    /* -------- TASK 3: em vs rem -------- */
+    .t3-outer {
+      /* STEP: try 20px first, then change to 10px to see em shrink */
+      font-size: 20px;            /* ← edit me to 10px later */
+      padding: 12px;
+      background: #faf0d7;
+      border-radius: 6px;
+    }
+    .t3-inner {
+      font-size: 1.5em;           /* relative to .t3-outer */
+      margin: 2rem;               /* relative to root (html) = 16px * 2 = 32px */
+      background: #ffe6a7;
+      padding: 8px;
+      border-radius: 6px;
+    }
+
+    /* -------- TASK 4: child combinator (>) -------- */
+    .menu { list-style: none; padding-left: 0; }
+    .menu > li {
+      color: #c1121f;             /* top-level only */
+      font-weight: 600;
+    }
+    .menu li li {
+      color: #0a58ca;             /* nested items */
+      font-weight: 400;
+    }
+    /* STEP (experiment): change '.menu > li' to '.menu li' to see all li turn red */
+  </style>
+</head>
+<body>
+  <h1>CSS Sizing & Selectors Activity</h1>
+  <p class="note">Follow the “STEP” comments in the CSS above, then refresh or use Live Server to observe changes.</p>
+
+  <!-- TASK 1 -->
+  <section id="task-1">
+    <h2>Task 1: Percentage-based Padding & Margin</h2>
+    <p class="note">Percentages for margin/padding are based on the parent’s <strong>width</strong> (even vertically).</p>
+    <div class="t1-parent">
+      <div class="t1-child">I’m the child. My margin-top is 10% and padding is 5% of the parent’s width.</div>
+    </div>
+    <ol>
+      <li>In CSS, change <code>.t1-parent { width: 400px; }</code> → <code>800px</code>.</li>
+      <li>Observe: <code>margin-top: 10%</code> doubles (40px → 80px). <code>padding: 5%</code> doubles too.</li>
+    </ol>
+  </section>
+
+  <!-- TASK 2 -->
+  <section id="task-2">
+    <h2>Task 2: Viewport Units (vw/vh)</h2>
+    <p class="note">Resize the browser window—this box and its text scale with the viewport.</p>
+    <div class="t2-hero">Viewport!</div>
+    <ul>
+      <li><code>50vw</code> = 50% of window width (not parent).</li>
+      <li><code>30vh</code> = 30% of window height.</li>
+      <li><code>5vh</code> font-size grows/shrinks with height.</li>
+    </ul>
+  </section>
+
+  <!-- TASK 3 -->
+  <section id="task-3">
+    <h2>Task 3: em vs rem</h2>
+    <div class="t3-outer">
+      <p>Outer text (parent). Current font-size: <code>20px</code> (change to <code>10px</code> later).</p>
+      <div class="t3-inner">
+        Inner text uses <code>font-size: 1.5em</code> (relative to parent), and <code>margin: 2rem</code> (relative to root).
+      </div>
+    </div>
+    <ol>
+      <li>Note the inner text size now (1.5 × 20px = 30px).</li>
+      <li>Change <code>.t3-outer { font-size: 10px; }</code>. Inner text becomes 15px, but the <code>2rem</code> margin stays 32px.</li>
+    </ol>
+  </section>
+
+  <!-- TASK 4 -->
+  <section id="task-4">
+    <h2>Task 4: Child Combinator Selector (>)</h2>
+    <ul class="menu">
+      <li>Home</li>
+      <li>About
+        <ul>
+          <li>Team</li>
+          <li>History</li>
+        </ul>
+      </li>
+      <li>Contact</li>
+    </ul>
+    <ol>
+      <li>Top-level <code>&lt;li&gt;</code> are red (via <code>.menu &gt; li</code>).</li>
+      <li>Nested <code>&lt;li&gt;</code> are blue (via <code>.menu li li</code>).</li>
+      <li><strong>Experiment</strong>: change <code>.menu &gt; li</code> to <code>.menu li</code> and see all items turn red.</li>
+    </ol>
+  </section>
+</body>
+</html>
